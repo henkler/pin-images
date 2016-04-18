@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    "meteor"
+  ],
+  "extends": [
+    "airbnb",
+    "plugin:meteor/recommended"
+  ],
+  "rules": {
+    "comma-dangle": 0
+  }
+}

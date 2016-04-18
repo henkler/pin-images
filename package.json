@@ -1,0 +1,17 @@
+{
+  "name": "pin-images",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "material-ui": "^0.14.4",
+    "meteor-node-stubs": "~0.2.0",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-komposer": "^1.8.0",
+    "react-mounter": "^1.2.0",
+    "react-router": "^2.2.4",
+    "react-tap-event-plugin": "^1.0.0"
+  }
+}
