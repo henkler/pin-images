@@ -4,25 +4,25 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
 import { insert, remove } from './methods';
 
-export const Pins = new Mongo.Collection('pins');
+export const Images = new Mongo.Collection('images');
 
-Pins.allow({
+Images.allow({
   insert() { return false; },
   update() { return false; },
   remove() { return false; }
 });
 
-Pins.deny({
+Images.deny({
   insert() { return true; },
   update() { return true; },
   remove() { return true; }
 });
 
-Pins.schema = new SimpleSchema({
-  imageId: {
+Images.schema = new SimpleSchema({
+  url: {
     type: String,
-    label: 'Image ID',
-    regEx: SimpleSchema.RegEx.Id
+    label: 'Image URL',
+    regEx: SimpleSchema.RegEx.Url
   },
   userId: {
     type: String,
@@ -40,15 +40,15 @@ Pins.schema = new SimpleSchema({
   }
 });
 
-Pins.attachSchema(Pins.schema);
+Images.attachSchema(Images.schema);
 
-Pins.helpers({
+Images.helpers({
   editableByCurrentUser() {
     return this.userId === Meteor.userId();
   },
   insert() {
     insert.call({
-      imageId: this.imageId
+      url: this.url
     });
   },
   canInsert() {

@@ -7,16 +7,16 @@ import { Pins } from './pins';
 export const insert = new ValidatedMethod({
   name: 'pins.insert',
   validate: new SimpleSchema({
-    url: { type: String, regEx: SimpleSchema.RegEx.Url }
+    imageId: { type: String, regEx: SimpleSchema.RegEx.Id }
   }).validator(),
-  run({ url }) {
+  run({ imageId }) {
     if (!this.userId) {
       throw new Meteor.Error('pins.insert.accessDenied',
         'Not authenticated');
     }
 
     const pinFields = {
-      url
+      imageId
     };
 
     Pins.insert(pinFields);
