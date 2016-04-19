@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import MainLayout from '/imports/ui/layouts/main';
 import Index from '/imports/ui/components/index';
 import AddImage from '/imports/ui/components/addImage';
+import AllPins from '/imports/ui/components/allPins';
 import MyPins from '/imports/ui/components/myPins';
 
 export const Routes = () => (
@@ -11,6 +12,7 @@ export const Routes = () => (
     <Route path="/" component={ MainLayout }>
       <IndexRoute component={ Index } />
       <Route path="/addimage" component={ AddImage } />
+      <Route path="/pins" component={ AllPins } />
       <Route path="/mypins" component={ MyPins } />
     </Route>
   </Router>

@@ -26,3 +26,16 @@ Meteor.publishComposite('myPins', {
     }
   ]
 });
+
+Meteor.publishComposite('allPins', {
+  find() {
+    return Pins.find({});
+  },
+  children: [
+    {
+      find(pin) {
+        return Images.find({ _id: pin.imageId });
+      }
+    }
+  ]
+});

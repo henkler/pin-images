@@ -65,19 +65,17 @@ Images.helpers({
     return false;
   },
   pin(description) {
-    console.log(this);
-    console.log(description);
     pin.call({ imageId: this._id, description });
   },
   canPin() {
     return this.canInsert() &&
-      Pins.find({ userId: this.userId, imageId: this._id }).count() === 0;
+      Pins.find({ userId: Meteor.userId(), imageId: this._id }).count() === 0;
   },
   unpin() {
     unpin.call({ imageId: this._id });
   },
   canUnpin() {
     return this.canInsert() &&
-        Pins.find({ userId: this.userId, imageId: this._id }).count() === 1;
+        Pins.find({ userId: Meteor.userId(), imageId: this._id }).count() === 1;
   }
 });

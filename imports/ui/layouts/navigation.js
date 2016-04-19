@@ -54,6 +54,14 @@ class Navigation extends React.Component {
     );
 
     menuItems.push(
+      <Link key="item_allpins" to="/pins" style={styles.link}>
+        <MenuItem leftIcon={<ActionHome />} onTouchTap={ this.handleClose }>
+          Discover Pins
+        </MenuItem>
+      </Link>
+    );
+
+    menuItems.push(
       <MenuItem key="item_login" insetChildren={true} onTouchTap={ this.handleClose }>
         <AccountsUIWrapper />
       </MenuItem>

@@ -56,8 +56,7 @@ class Pin extends React.Component {
           {actionButtons}
         </CardActions>
       );
-    }
-    else {
+    } else {
       return null;
     }
   }
