@@ -1,12 +1,12 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router';
-import LeftNav from 'material-ui/lib/left-nav';
-import MenuItem from 'material-ui/lib/menus/menu-item';
-import AccountBox from 'material-ui/lib/svg-icons/action/account-box';
-import NavigationApps from 'material-ui/lib/svg-icons/navigation/apps';
-import ActionHome from 'material-ui/lib/svg-icons/action/home';
-import AVRepeat from 'material-ui/lib/svg-icons/av/repeat';
+import Drawer from 'material-ui/Drawer';
+import MenuItem from 'material-ui/MenuItem';
+import AccountBox from 'material-ui/svg-icons/action/account-box';
+import NavigationApps from 'material-ui/svg-icons/navigation/apps';
+import ActionHome from 'material-ui/svg-icons/action/home';
+import AVRepeat from 'material-ui/svg-icons/av/repeat';
 
 import AccountsUIWrapper from '../components/accountsUIWrapper';
 
@@ -46,6 +46,14 @@ class Navigation extends React.Component {
     );
 
     menuItems.push(
+      <Link key="item_mypins" to="/mypins" style={styles.link}>
+        <MenuItem leftIcon={<ActionHome />} onTouchTap={ this.handleClose }>
+          My Pins
+        </MenuItem>
+      </Link>
+    );
+
+    menuItems.push(
       <MenuItem key="item_login" insetChildren={true} onTouchTap={ this.handleClose }>
         <AccountsUIWrapper />
       </MenuItem>
@@ -56,14 +64,14 @@ class Navigation extends React.Component {
 
   render() {
     return (
-      <LeftNav
+      <Drawer
         docked={false}
-        width={250}
+        width={350}
         open={this.state.open}
         onRequestChange={open => this.setState({ open })}
       >
         {this.renderMenuItems()}
-      </LeftNav>
+      </Drawer>
     );
   }
 }

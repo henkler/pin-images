@@ -2,29 +2,27 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Pins } from '../pins';
+import { Images } from '../../images/images';
 
-Meteor.publish('pins', function pins(pinId) {
-  check(pinId, String);
+Meteor.publishComposite('myPins', {
+  find() {
+    if (!this.userId) {
+      return this.ready();
+    }
 
-  return Pins.find(pinId);
-});
+    const query = {};
 
-Meteor.publish('allPins', function pins() {
-  const query = {};
+    if (this.userId) {
+      query.userId = this.userId;
+    }
 
-  return Pins.find(query);
-});
-
-Meteor.publish('myPins', function pins() {
-  if (!this.userId) {
-    return this.ready();
-  }
-
-  const query = {};
-
-  if (this.userId) {
-    query.userId = this.userId;
-  }
-
-  return Pins.find(query);
+    return Pins.find(query);
+  },
+  children: [
+    {
+      find(pin) {
+        return Images.find({ _id: pin.imageId });
+      }
+    }
+  ]
 });

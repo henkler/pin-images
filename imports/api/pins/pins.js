@@ -21,8 +21,13 @@ Pins.deny({
 Pins.schema = new SimpleSchema({
   imageId: {
     type: String,
-    label: 'Image ID',
+    label: 'Pin ID',
     regEx: SimpleSchema.RegEx.Id
+  },
+  description: {
+    type: String,
+    label: 'Pin Description',
+    defaultValue: ''
   },
   userId: {
     type: String,
@@ -41,27 +46,3 @@ Pins.schema = new SimpleSchema({
 });
 
 Pins.attachSchema(Pins.schema);
-
-Pins.helpers({
-  editableByCurrentUser() {
-    return this.userId === Meteor.userId();
-  },
-  insert() {
-    insert.call({
-      imageId: this.imageId
-    });
-  },
-  canInsert() {
-    if (Meteor.userId()) {
-      return true;
-    }
-
-    return false;
-  },
-  remove() {
-    remove.call({ _id: this._id });
-  },
-  canRemove() {
-    return this.editableByCurrentUser();
-  }
-});

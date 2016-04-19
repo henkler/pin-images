@@ -2,7 +2,9 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-import { insert, remove } from './methods';
+import { insert, pin, unpin } from './methods';
+
+import { Pins } from '../pins/pins';
 
 export const Images = new Mongo.Collection('images');
 
@@ -21,8 +23,13 @@ Images.deny({
 Images.schema = new SimpleSchema({
   url: {
     type: String,
-    label: 'Image URL',
+    label: 'Pin URL',
     regEx: SimpleSchema.RegEx.Url
+  },
+  pinCount: {
+    type: Number,
+    label: 'Number of pins',
+    defaultValue: 0
   },
   userId: {
     type: String,
@@ -47,9 +54,8 @@ Images.helpers({
     return this.userId === Meteor.userId();
   },
   insert() {
-    insert.call({
-      url: this.url
-    });
+    const imageId = insert.call({ url: this.url });
+    this.pin(this.description);
   },
   canInsert() {
     if (Meteor.userId()) {
@@ -58,10 +64,20 @@ Images.helpers({
 
     return false;
   },
-  remove() {
-    remove.call({ _id: this._id });
+  pin(description) {
+    console.log(this);
+    console.log(description);
+    pin.call({ imageId: this._id, description });
   },
-  canRemove() {
-    return this.editableByCurrentUser();
+  canPin() {
+    return this.canInsert() &&
+      Pins.find({ userId: this.userId, imageId: this._id }).count() === 0;
+  },
+  unpin() {
+    unpin.call({ imageId: this._id });
+  },
+  canUnpin() {
+    return this.canInsert() &&
+        Pins.find({ userId: this.userId, imageId: this._id }).count() === 1;
   }
 });
