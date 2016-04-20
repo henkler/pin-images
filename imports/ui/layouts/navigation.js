@@ -46,17 +46,17 @@ class Navigation extends React.Component {
     );
 
     menuItems.push(
-      <Link key="item_mypins" to="/mypins" style={styles.link}>
+      <Link key="item_myimages" to="/myimages" style={styles.link}>
         <MenuItem leftIcon={<ActionHome />} onTouchTap={ this.handleClose }>
-          My Pins
+          My Images
         </MenuItem>
       </Link>
     );
 
     menuItems.push(
-      <Link key="item_allpins" to="/pins" style={styles.link}>
+      <Link key="item_allimages" to="/images" style={styles.link}>
         <MenuItem leftIcon={<ActionHome />} onTouchTap={ this.handleClose }>
-          Discover Pins
+          Discover Images
         </MenuItem>
       </Link>
     );

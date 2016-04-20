@@ -21,7 +21,7 @@ const styles = {
   }
 };
 
-class Pin extends React.Component {
+class Image extends React.Component {
   constructor(props) {
     super(props);
 
@@ -30,16 +30,15 @@ class Pin extends React.Component {
   }
 
   handlePinClick() {
-    this.props.pin.image.pin(this.props.pin.description);
+    this.props.image.pin(this.props.image.description);
   }
 
   handleUnpinClick() {
-    this.props.pin.image.unpin();
+    this.props.image.unpin();
   }
 
   renderActions() {
-    const pin = this.props.pin;
-    const image = pin.image;
+    const image = this.props.image;
     const actionButtons = [];
 
     if (image.canPin()) {
@@ -56,9 +55,9 @@ class Pin extends React.Component {
           {actionButtons}
         </CardActions>
       );
-    } else {
-      return null;
     }
+
+    return null;
   }
 
   render() {
@@ -66,10 +65,10 @@ class Pin extends React.Component {
       <Paper style={styles.paper} zDepth={4}>
         <Card>
           <CardTitle
-            title={this.props.pin.description}
+            title={this.props.image.description}
           />
           <CardMedia>
-            <img src={this.props.pin.image.url} />
+            <img src={this.props.image.url} />
           </CardMedia>
           {this.renderActions()}
         </Card>
@@ -78,12 +77,12 @@ class Pin extends React.Component {
   }
 }
 
-Pin.propTypes = {
-  pin: React.PropTypes.object.isRequired
+Image.propTypes = {
+  image: React.PropTypes.object.isRequired
 };
 
-Pin.contextTypes = {
+Image.contextTypes = {
   router: React.PropTypes.object.isRequired
 };
 
-export default Pin;
+export default Image;

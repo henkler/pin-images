@@ -1,0 +1,10 @@
+{
+  "private": {
+    "oAuth": {
+      "twitter": {
+        "consumerKey": "ENTER_KEY",
+        "secret": "ENTER_SECRET"
+      }
+    }
+  }
+}

@@ -33,9 +33,8 @@ Meteor.startup(() => {
       { url: 'http://lovelace-media.imgix.net/uploads/414/cceea470-2174-0132-08db-0eae5eefacd9.jpg?', description: 'Owwwwwww!' }
     ];
     const user1 = Meteor.users.findOne({ username: 'whataburger' });
-    console.log(user1);
     data1.forEach((image) => {
-      const imageId = Images.insert({ url: image.url, pinCount: 0, userId: user1._id }, { bypassCollection2: true });
+      const imageId = Images.insert({ url: image.url, pinCount: 1, pinnedBy: [ user1._id ], userId: user1._id }, { bypassCollection2: true });
       Pins.insert({ imageId, userId: user1._id, description: image.description }, { bypassCollection2: true });
     });
 
@@ -52,9 +51,8 @@ Meteor.startup(() => {
       { url: 'http://badurl.localhost/test.img', description: 'So good! You have to see this!' }
     ];
     const user2 = Meteor.users.findOne({ username: 'pinner55' });
-    console.log(user2);
     data2.forEach((image) => {
-      const imageId = Images.insert({ url: image.url, pinCount: 0, userId: user2._id }, { bypassCollection2: true });
+      const imageId = Images.insert({ url: image.url, pinCount: 1, pinnedBy: [ user2._id ], userId: user2._id }, { bypassCollection2: true });
       Pins.insert({ imageId, userId: user2._id, description: image.description }, { bypassCollection2: true });
     });
   }

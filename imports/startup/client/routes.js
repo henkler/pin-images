@@ -4,16 +4,16 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import MainLayout from '/imports/ui/layouts/main';
 import Index from '/imports/ui/components/index';
 import AddImage from '/imports/ui/components/addImage';
-import AllPins from '/imports/ui/components/allPins';
-import MyPins from '/imports/ui/components/myPins';
+import AllImages from '/imports/ui/components/allImages';
+import MyImages from '/imports/ui/components/myImages';
 
 export const Routes = () => (
   <Router history={ browserHistory }>
     <Route path="/" component={ MainLayout }>
       <IndexRoute component={ Index } />
       <Route path="/addimage" component={ AddImage } />
-      <Route path="/pins" component={ AllPins } />
-      <Route path="/mypins" component={ MyPins } />
+      <Route path="/images" component={ AllImages } />
+      <Route path="/myimages" component={ MyImages } />
     </Route>
   </Router>
 );

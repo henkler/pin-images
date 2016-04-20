@@ -29,7 +29,12 @@ Meteor.publishComposite('myPins', {
 
 Meteor.publishComposite('allPins', {
   find() {
-    return Pins.find({});
+    const query = {};
+
+    if (this.userId) {
+      query.userId = { $ne: this.userId };
+    }
+    return Pins.find(query);
   },
   children: [
     {

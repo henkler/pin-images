@@ -5,27 +5,6 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { Images } from './images';
 import { Pins } from '../pins/pins';
 
-export const insert = new ValidatedMethod({
-  name: 'images.insert',
-  validate: new SimpleSchema({
-    url: { type: String, regEx: SimpleSchema.RegEx.Url },
-    description: { type: String, defaultValue: '' }
-  }).validator(),
-  run({ url, description }) {
-    if (!this.userId) {
-      throw new Meteor.Error('images.insert.accessDenied',
-        'Not authenticated');
-    }
-
-    const imageFields = {
-      url
-    };
-
-    const imageId = Images.insert(imageFields);
-    Pins.insert({ imageId, description });
-  }
-});
-
 export const pin = new ValidatedMethod({
   name: 'images.pin',
   validate: new SimpleSchema({
@@ -52,6 +31,8 @@ export const pin = new ValidatedMethod({
         'Image is already pinned');
     }
 
+    Images.update(image, { $push: { pinnedBy: this.userId } });
+    Images.update(image, { $inc: { pinCount: 1 } });
     Pins.insert({ imageId, description });
   }
 });
@@ -81,9 +62,32 @@ export const unpin = new ValidatedMethod({
         'Image is not pinned');
     }
 
-    Pins.remove(existingPin);
+    Images.update(image, { $pull: { pinnedBy: this.userId } });
     Images.update(image, { $inc: { pinCount: -1 } });
+    Pins.remove(existingPin);
+
     // remove the image if the pin count has went < 1
     Images.remove({ _id: image._id, pinCount: { $lt: 1 } });
+  }
+});
+
+export const insert = new ValidatedMethod({
+  name: 'images.insert',
+  validate: new SimpleSchema({
+    url: { type: String, regEx: SimpleSchema.RegEx.Url },
+    description: { type: String, defaultValue: '' }
+  }).validator(),
+  run({ url, description }) {
+    if (!this.userId) {
+      throw new Meteor.Error('images.insert.accessDenied',
+        'Not authenticated');
+    }
+
+    const imageFields = {
+      url
+    };
+
+    const imageId = Images.insert(imageFields);
+    pin.call({ imageId, description });
   }
 });

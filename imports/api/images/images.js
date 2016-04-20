@@ -31,6 +31,10 @@ Images.schema = new SimpleSchema({
     label: 'Number of pins',
     defaultValue: 0
   },
+  pinnedBy: {
+    type: [String],
+    defaultValue: []
+  },
   userId: {
     type: String,
     regEx: SimpleSchema.RegEx.Id,
@@ -54,8 +58,7 @@ Images.helpers({
     return this.userId === Meteor.userId();
   },
   insert() {
-    const imageId = insert.call({ url: this.url });
-    this.pin(this.description);
+    insert.call({ url: this.url });
   },
   canInsert() {
     if (Meteor.userId()) {

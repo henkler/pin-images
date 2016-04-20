@@ -1,5 +1,5 @@
 import React from 'react';
-import PinList from '../containers/pinList';
+import ImageList from '../containers/imageList';
 
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -9,7 +9,7 @@ const styles = {
   }
 };
 
-const MyPins = (props, context) => (
+const MyImages = (props, context) => (
   <div>
     <RaisedButton
       label="Add Image"
@@ -17,14 +17,14 @@ const MyPins = (props, context) => (
       primary={true}
       onClick={() => context.router.push('/addimage')}
     />
-    <PinList
-      publication={'myPins'}
+    <ImageList
+      publication={'myImages'}
     />
   </div>
 );
 
-MyPins.contextTypes = {
+MyImages.contextTypes = {
   router: React.PropTypes.object.isRequired
 };
 
-export default MyPins;
+export default MyImages;
