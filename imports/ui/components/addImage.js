@@ -53,7 +53,7 @@ class AddImage extends React.Component {
           hintText="Description"
         />
         <br />
-        <RaisedButton label="Save" primary={true} onClick={this.handleSave} />
+        <RaisedButton label="Save" primary onClick={this.handleSave} />
       </Paper>
     );
   }

@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: ["error", { "props": false }] */
 import { Meteor } from 'meteor/meteor';
 import { composeWithTracker } from 'react-komposer';
 

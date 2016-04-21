@@ -1,9 +1,7 @@
 /* eslint-disable prefer-arrow-callback */
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
 import { Pins } from '../../pins/pins';
 import { Images } from '../images';
-import _ from 'underscore';
 
 Meteor.publishComposite('myImages', {
   find() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
-import { Card, CardMedia, CardActions, CardTitle, CardText } from 'material-ui/Card';
+import { Card, CardMedia, CardActions, CardTitle } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 
 const styles = {
@@ -42,11 +42,21 @@ class Image extends React.Component {
     const actionButtons = [];
 
     if (image.canPin()) {
-      actionButtons.push(<FlatButton key="action_pin" label="Pin" onClick={ this.handlePinClick } />);
+      actionButtons.push(
+        <FlatButton
+          key="action_pin"
+          label="Pin"
+          onClick={ this.handlePinClick }
+        />);
     }
 
     if (image.canUnpin()) {
-      actionButtons.push(<FlatButton key="action_unpin" label="Unpin" onClick={ this.handleUnpinClick } />);
+      actionButtons.push(
+        <FlatButton
+          key="action_unpin"
+          label="Unpin"
+          onClick={ this.handleUnpinClick }
+        />);
     }
 
     if (actionButtons.length > 0) {
@@ -68,7 +78,7 @@ class Image extends React.Component {
             title={this.props.image.description}
           />
           <CardMedia>
-            <img src={this.props.image.url} />
+            <img role="presentation" src={this.props.image.url} />
           </CardMedia>
           {this.renderActions()}
         </Card>

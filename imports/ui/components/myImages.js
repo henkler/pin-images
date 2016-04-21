@@ -14,7 +14,7 @@ const MyImages = (props, context) => (
     <RaisedButton
       label="Add Image"
       style={styles.button}
-      primary={true}
+      primary
       onClick={() => context.router.push('/addimage')}
     />
     <ImageList

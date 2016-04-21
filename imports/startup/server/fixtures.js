@@ -34,8 +34,17 @@ Meteor.startup(() => {
     ];
     const user1 = Meteor.users.findOne({ username: 'whataburger' });
     data1.forEach((image) => {
-      const imageId = Images.insert({ url: image.url, pinCount: 1, pinnedBy: [ user1._id ], userId: user1._id }, { bypassCollection2: true });
-      Pins.insert({ imageId, userId: user1._id, description: image.description }, { bypassCollection2: true });
+      const imageId = Images.insert({
+        url: image.url,
+        pinCount: 1,
+        pinnedBy: [user1._id],
+        userId: user1._id
+      }, { bypassCollection2: true });
+      Pins.insert({
+        imageId,
+        userId: user1._id,
+        description: image.description
+      }, { bypassCollection2: true });
     });
 
     const data2 = [
@@ -52,8 +61,17 @@ Meteor.startup(() => {
     ];
     const user2 = Meteor.users.findOne({ username: 'pinner55' });
     data2.forEach((image) => {
-      const imageId = Images.insert({ url: image.url, pinCount: 1, pinnedBy: [ user2._id ], userId: user2._id }, { bypassCollection2: true });
-      Pins.insert({ imageId, userId: user2._id, description: image.description }, { bypassCollection2: true });
+      const imageId = Images.insert({
+        url: image.url,
+        pinCount: 1,
+        pinnedBy: [user2._id],
+        userId: user2._id
+      }, { bypassCollection2: true });
+      Pins.insert({
+        imageId,
+        userId: user2._id,
+        description: image.description
+      }, { bypassCollection2: true });
     });
   }
 });

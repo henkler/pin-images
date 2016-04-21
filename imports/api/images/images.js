@@ -47,6 +47,7 @@ Images.schema = new SimpleSchema({
       }
 
       this.unset();  // Prevent user from supplying their own value
+      return undefined;
     }
   }
 });

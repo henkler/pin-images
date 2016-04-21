@@ -1,12 +1,8 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import AccountBox from 'material-ui/svg-icons/action/account-box';
-import NavigationApps from 'material-ui/svg-icons/navigation/apps';
 import ActionHome from 'material-ui/svg-icons/action/home';
-import AVRepeat from 'material-ui/svg-icons/av/repeat';
 
 import AccountsUIWrapper from '../components/accountsUIWrapper';
 
@@ -62,7 +58,7 @@ class Navigation extends React.Component {
     );
 
     menuItems.push(
-      <MenuItem key="item_login" insetChildren={true} onTouchTap={ this.handleClose }>
+      <MenuItem key="item_login" insetChildren onTouchTap={ this.handleClose }>
         <AccountsUIWrapper />
       </MenuItem>
     );
@@ -73,7 +69,7 @@ class Navigation extends React.Component {
   render() {
     return (
       <Drawer
-        docked={false}
+        docked={false} // eslint-disable-line jsx-boolean-value
         width={350}
         open={this.state.open}
         onRequestChange={open => this.setState({ open })}

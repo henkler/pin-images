@@ -1,14 +1,14 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
-import {deepOrange500} from 'material-ui/styles/colors';
+import { deepOrange500 } from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Navigation from './navigation';
 
 const muiTheme = getMuiTheme({
   palette: {
-    accent1Color: deepOrange500,
-  },
+    accent1Color: deepOrange500
+  }
 });
 
 class MainLayout extends React.Component {
@@ -24,11 +24,11 @@ class MainLayout extends React.Component {
 
   render() {
     return (
-      <MuiThemeProvider muiTheme={muiTheme}>
+      <MuiThemeProvider muiTheme={ muiTheme }>
         <div>
           <AppBar
             title="Pin Images"
-            onLeftIconButtonTouchTap={this.handleMenuClick}
+            onLeftIconButtonTouchTap={ this.handleMenuClick }
           />
           <Navigation ref="navBar" />
           { this.props.children }

@@ -1,8 +1,5 @@
-import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
-
-import { insert, remove } from './methods';
 
 export const Pins = new Mongo.Collection('pins');
 
@@ -41,6 +38,7 @@ Pins.schema = new SimpleSchema({
       }
 
       this.unset();  // Prevent user from supplying their own value
+      return undefined;
     }
   }
 });
