@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
@@ -41,13 +42,15 @@ class Navigation extends React.Component {
       </Link>
     );
 
-    menuItems.push(
-      <Link key="item_myimages" to="/myimages" style={styles.link}>
-        <MenuItem leftIcon={<ActionHome />} onTouchTap={ this.handleClose }>
-          My Images
-        </MenuItem>
-      </Link>
-    );
+    if (Meteor.userId()) {
+      menuItems.push(
+        <Link key="item_myimages" to="/myimages" style={styles.link}>
+          <MenuItem leftIcon={<ActionHome />} onTouchTap={ this.handleClose }>
+            My Images
+          </MenuItem>
+        </Link>
+      );
+    }
 
     menuItems.push(
       <Link key="item_allimages" to="/images" style={styles.link}>

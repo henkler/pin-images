@@ -23,9 +23,9 @@ const Index = (props, context) => (
       </CardText>
       <CardActions>
         <RaisedButton
-          label="Discover Pins"
+          label="Discover Images"
           primary
-          onClick={() => context.router.push('/pins')}
+          onClick={() => context.router.push('/images')}
         />
       </CardActions>
     </Card>
