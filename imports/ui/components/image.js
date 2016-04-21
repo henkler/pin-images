@@ -2,7 +2,7 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import { Card, CardMedia, CardActions, CardTitle } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
-import IconFavorite from 'material-ui/svg-icons/action/favorite';
+import IconFavorite from 'material-ui/svg-icons/action/favorite-border';
 import IconModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 
 import EditImage from './editImage';
@@ -13,7 +13,7 @@ const styles = {
     margin: 10
   },
   actions: {
-    textAlign: 'center'
+    textAlign: 'right'
   },
   thumbnailContainer: {
     textAlign: 'center'
@@ -22,14 +22,17 @@ const styles = {
     height: 200,
     width: 'auto'
   },
-  largeIcon: {
-    width: 60,
-    height: 60
+  mediumIcon: {
+    width: 48,
+    height: 48
   },
-  large: {
-    width: 70,
-    height: 70,
+  mediumIconButton: {
+    width: 50,
+    height: 50,
     padding: 10
+  },
+  mediaOverlay: {
+    background: 'initial'
   }
 };
 
@@ -64,25 +67,23 @@ class Image extends React.Component {
           key="action_pin"
           label="Pin"
           tooltip="Pin Image"
-          style={styles.large}
-          iconStyle={styles.largeIcon}
+          style={styles.mediumIconButton}
+          iconStyle={styles.mediumIcon}
           onClick={ this.handlePinClick }
         >
           <IconFavorite color="#bd081c" />
         </IconButton>);
-    }
-
-    if (image.canEdit()) {
+    } else if (image.canEdit()) {
       actionButtons.push(
         <IconButton
           key="action_edit"
           label="Edit"
           tooltip="Edit Pin"
-          style={styles.large}
-          iconStyle={styles.largeIcon}
+          style={styles.mediumIconButton}
+          iconStyle={styles.mediumIcon}
           onClick={ this.handleEditClick }
         >
-          <IconModeEdit />
+          <IconModeEdit color="bd081c" />
           <EditImage ref="editImage" image={this.props.image} />
         </IconButton>);
     }
@@ -102,13 +103,15 @@ class Image extends React.Component {
     return (
       <Paper style={styles.paper} zDepth={4}>
         <Card>
-          <CardMedia>
+          <CardMedia
+            overlay={this.renderActions()}
+            overlayContentStyle={styles.mediaOverlay}
+          >
             <img role="presentation" src={this.props.image.url} />
           </CardMedia>
           <CardTitle
             title={this.props.image.description}
           />
-          {this.renderActions()}
         </Card>
       </Paper>
     );
