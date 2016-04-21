@@ -13,7 +13,7 @@ Meteor.publishComposite('myImages', {
 
     const query = {};
 
-    query.pinnedBy = { $elemMatch: { $eq: this.userId } };
+    query.pinnedBy = { $eq: this.userId };
 
     return Images.find(query);
   },
@@ -29,15 +29,10 @@ Meteor.publishComposite('myImages', {
 Meteor.publishComposite('allImages', {
   find() {
     const query = {};
-    const pinQuery = {};
-    const userId = this.userId;
 
     // if user logged in, find all images _not_ pinned by the user
-    if (userId) {
-      pinQuery.userId = { $eq: userId };
-      const imageIdList = _.uniq(Pins.find(pinQuery, { fields: { imageId: 1 } })
-        .map(i => i.imageId));
-      query._id = { $nin: imageIdList };
+    if (this.userId) {
+      query.pinnedBy = { $ne: this.userId };
     }
 
     return Images.find(query);
@@ -46,10 +41,9 @@ Meteor.publishComposite('allImages', {
     {
       find(image) {
         const pinQuery = {};
-        const userId = this.userId;
 
-        if (userId) {
-          pinQuery.userId = { $ne: userId };
+        if (this.userId) {
+          pinQuery.userId = { $ne: this.userId };
         }
         pinQuery.imageId = image._id;
 

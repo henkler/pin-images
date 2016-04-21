@@ -6,12 +6,12 @@
   },
   "dependencies": {
     "material-ui": "^0.15.0-beta.1",
-    "meteor-node-stubs": "~0.2.0",
+    "meteor-node-stubs": "~0.2.3",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-komposer": "^1.8.0",
     "react-mounter": "^1.2.0",
-    "react-router": "^2.2.4",
+    "react-router": "^2.3.0",
     "react-tap-event-plugin": "^1.0.0"
   }
 }
