@@ -6,8 +6,7 @@ import FlatButton from 'material-ui/FlatButton';
 const styles = {
   paper: {
     width: 350,
-    margin: 10,
-    display: 'inline-block'
+    margin: 10
   },
   actions: {
     textAlign: 'center'

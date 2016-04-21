@@ -1,14 +1,15 @@
 import React from 'react';
+import Masonry from 'react-masonry-component';
 import Image from './image';
 
 const ImageList = (props) => (
-  <div>
+  <Masonry>
     {props.images.map(image =>
       <Image
         key={image._id}
         image={image}
       />)}
-  </div>
+  </Masonry>
 );
 
 ImageList.propTypes = {
