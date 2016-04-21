@@ -2,10 +2,10 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import { Card, CardMedia, CardActions, CardTitle } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
-import FlatButton from 'material-ui/FlatButton';
-import IconPinDrop from 'material-ui/svg-icons/maps/pin-drop';
 import IconFavorite from 'material-ui/svg-icons/action/favorite';
-import IconClear from 'material-ui/svg-icons/content/clear';
+import IconModeEdit from 'material-ui/svg-icons/editor/mode-edit';
+
+import EditImage from './editImage';
 
 const styles = {
   paper: {
@@ -38,15 +38,20 @@ class Image extends React.Component {
     super(props);
 
     this.handlePinClick = this.handlePinClick.bind(this);
-    this.handleUnpinClick = this.handleUnpinClick.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
   }
 
   handlePinClick() {
-    this.props.image.pin(this.props.image.description);
+    try {
+      this.props.image.pin(this.props.image.description);
+      this.context.showMessage('Image Pinned');
+    } catch (ex) {
+      this.context.showMessage(`Error: ${ex.reason}`);
+    }
   }
 
-  handleUnpinClick() {
-    this.props.image.unpin();
+  handleEditClick() {
+    this.refs.editImage.handleOpen();
   }
 
   renderActions() {
@@ -67,17 +72,18 @@ class Image extends React.Component {
         </IconButton>);
     }
 
-    if (image.canUnpin()) {
+    if (image.canEdit()) {
       actionButtons.push(
         <IconButton
-          key="action_unpin"
-          label="Unpin"
-          tooltip="Unpin Image"
+          key="action_edit"
+          label="Edit"
+          tooltip="Edit Pin"
           style={styles.large}
           iconStyle={styles.largeIcon}
-          onClick={ this.handleUnpinClick }
+          onClick={ this.handleEditClick }
         >
-          <IconClear />
+          <IconModeEdit />
+          <EditImage ref="editImage" image={this.props.image} />
         </IconButton>);
     }
 
@@ -114,7 +120,8 @@ Image.propTypes = {
 };
 
 Image.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: React.PropTypes.object.isRequired,
+  showMessage: React.PropTypes.func.isRequired
 };
 
 export default Image;

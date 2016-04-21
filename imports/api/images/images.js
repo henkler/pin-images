@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 
-import { insert, pin, unpin } from './methods';
+import { insert, pin, unpin, edit } from './methods';
 
 import { Pins } from '../pins/pins';
 
@@ -81,5 +81,11 @@ Images.helpers({
   canUnpin() {
     return this.canInsert() &&
         Pins.find({ userId: Meteor.userId(), imageId: this._id }).count() === 1;
+  },
+  edit(description) {
+    edit.call({ imageId: this._id, description });
+  },
+  canEdit() {
+    return this.canUnpin();
   }
 });

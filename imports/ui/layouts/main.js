@@ -4,6 +4,7 @@ import { deepOrange500 } from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Navigation from './navigation';
+import MessageBar from '../components/messageBar';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -16,10 +17,19 @@ class MainLayout extends React.Component {
     super(props);
 
     this.handleMenuClick = this.handleMenuClick.bind(this);
+    this.showMessage = this.showMessage.bind(this);
+  }
+
+  getChildContext() {
+    return { showMessage: this.showMessage };
   }
 
   handleMenuClick() {
     this.refs.navBar.handleToggle();
+  }
+
+  showMessage(message) {
+    this.refs.messageBar.showMessage(message);
   }
 
   render() {
@@ -32,6 +42,7 @@ class MainLayout extends React.Component {
           />
           <Navigation ref="navBar" />
           { this.props.children }
+          <MessageBar ref="messageBar" />
         </div>
       </MuiThemeProvider>
     );
@@ -40,6 +51,10 @@ class MainLayout extends React.Component {
 
 MainLayout.propTypes = {
   children: React.PropTypes.object
+};
+
+MainLayout.childContextTypes = {
+  showMessage: React.PropTypes.func.isRequired
 };
 
 export default MainLayout;

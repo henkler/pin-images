@@ -91,3 +91,33 @@ export const insert = new ValidatedMethod({
     pin.call({ imageId, description });
   }
 });
+
+export const edit = new ValidatedMethod({
+  name: 'images.edit',
+  validate: new SimpleSchema({
+    imageId: { type: String, regEx: SimpleSchema.RegEx.Id },
+    description: { type: String, defaultValue: '' }
+  }).validator(),
+  run({ imageId, description }) {
+    if (!this.userId) {
+      throw new Meteor.Error('images.edit.accessDenied',
+        'Not authenticated');
+    }
+
+    const image = Images.findOne(imageId);
+
+    if (!image) {
+      throw new Meteor.Error('images.edit.accessDenied',
+        'Unable to find image');
+    }
+
+    const existingPin = Pins.findOne({ imageId, userId: this.userId });
+
+    if (!existingPin) {
+      throw new Meteor.Error('images.edit.accessDenied',
+        'Unable to retrieve pin');
+    }
+
+    Pins.update(existingPin._id, { $set: { description } });
+  }
+});
