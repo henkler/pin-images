@@ -1,7 +1,11 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import { Card, CardMedia, CardActions, CardTitle } from 'material-ui/Card';
+import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
+import IconPinDrop from 'material-ui/svg-icons/maps/pin-drop';
+import IconFavorite from 'material-ui/svg-icons/action/favorite';
+import IconClear from 'material-ui/svg-icons/content/clear';
 
 const styles = {
   paper: {
@@ -17,6 +21,15 @@ const styles = {
   thumbnail: {
     height: 200,
     width: 'auto'
+  },
+  largeIcon: {
+    width: 60,
+    height: 60
+  },
+  large: {
+    width: 70,
+    height: 70,
+    padding: 10
   }
 };
 
@@ -42,20 +55,30 @@ class Image extends React.Component {
 
     if (image.canPin()) {
       actionButtons.push(
-        <FlatButton
+        <IconButton
           key="action_pin"
           label="Pin"
+          tooltip="Pin Image"
+          style={styles.large}
+          iconStyle={styles.largeIcon}
           onClick={ this.handlePinClick }
-        />);
+        >
+          <IconFavorite color="#bd081c" />
+        </IconButton>);
     }
 
     if (image.canUnpin()) {
       actionButtons.push(
-        <FlatButton
+        <IconButton
           key="action_unpin"
           label="Unpin"
+          tooltip="Unpin Image"
+          style={styles.large}
+          iconStyle={styles.largeIcon}
           onClick={ this.handleUnpinClick }
-        />);
+        >
+          <IconClear />
+        </IconButton>);
     }
 
     if (actionButtons.length > 0) {
@@ -73,12 +96,12 @@ class Image extends React.Component {
     return (
       <Paper style={styles.paper} zDepth={4}>
         <Card>
-          <CardTitle
-            title={this.props.image.description}
-          />
           <CardMedia>
             <img role="presentation" src={this.props.image.url} />
           </CardMedia>
+          <CardTitle
+            title={this.props.image.description}
+          />
           {this.renderActions()}
         </Card>
       </Paper>

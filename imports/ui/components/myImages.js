@@ -1,30 +1,14 @@
 import React from 'react';
+import AddImage from './addImage';
 import ImageList from '../containers/imageList';
 
-import RaisedButton from 'material-ui/RaisedButton';
-
-const styles = {
-  button: {
-    margin: 12
-  }
-};
-
-const MyImages = (props, context) => (
+const MyImages = () => (
   <div>
-    <RaisedButton
-      label="Add Image"
-      style={styles.button}
-      primary
-      onClick={() => context.router.push('/addimage')}
-    />
+    <AddImage />
     <ImageList
       publication={'myImages'}
     />
   </div>
 );
-
-MyImages.contextTypes = {
-  router: React.PropTypes.object.isRequired
-};
 
 export default MyImages;
