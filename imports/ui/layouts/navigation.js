@@ -3,7 +3,9 @@ import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import ActionHome from 'material-ui/svg-icons/action/home';
+import IconHome from 'material-ui/svg-icons/action/home';
+import IconInfo from 'material-ui/svg-icons/action/info';
+import IconImageCollectionsBookmark from 'material-ui/svg-icons/image/collections-bookmark';
 
 import AccountsUIWrapper from '../components/accountsUIWrapper';
 
@@ -36,7 +38,7 @@ class Navigation extends React.Component {
 
     menuItems.push(
       <Link key="item_home" to="/" style={styles.link}>
-        <MenuItem leftIcon={<ActionHome />} onTouchTap={ this.handleClose }>
+        <MenuItem leftIcon={<IconHome />} onTouchTap={ this.handleClose }>
           Home
         </MenuItem>
       </Link>
@@ -45,7 +47,7 @@ class Navigation extends React.Component {
     if (Meteor.userId()) {
       menuItems.push(
         <Link key="item_myimages" to="/myimages" style={styles.link}>
-          <MenuItem leftIcon={<ActionHome />} onTouchTap={ this.handleClose }>
+          <MenuItem leftIcon={<IconImageCollectionsBookmark />} onTouchTap={ this.handleClose }>
             My Images
           </MenuItem>
         </Link>
@@ -53,9 +55,9 @@ class Navigation extends React.Component {
     }
 
     menuItems.push(
-      <Link key="item_allimages" to="/images" style={styles.link}>
-        <MenuItem leftIcon={<ActionHome />} onTouchTap={ this.handleClose }>
-          Discover Images
+      <Link key="item_about" to="/about" style={styles.link}>
+        <MenuItem leftIcon={<IconInfo />} onTouchTap={ this.handleClose }>
+          About
         </MenuItem>
       </Link>
     );

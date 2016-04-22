@@ -10,10 +10,10 @@ const styles = {
   }
 };
 
-const Index = (props, context) => (
+const AboutPage = (props, context) => (
   <Paper style={styles.paper} zDepth={4}>
     <Card>
-      <CardTitle title="Pin Images" subtitle="Pin Images.  Collect them all." />
+      <CardTitle title="Pin Images" subtitle="Upload Images. Pin Images.  Collect them all." />
       <CardText>
         <h2>Wow!</h2>
         <h3>Features:</h3>
@@ -25,15 +25,15 @@ const Index = (props, context) => (
         <RaisedButton
           label="Discover Images"
           primary
-          onClick={() => context.router.push('/images')}
+          onClick={() => context.router.push('/')}
         />
       </CardActions>
     </Card>
   </Paper>
 );
 
-Index.contextTypes = {
+AboutPage.contextTypes = {
   router: React.PropTypes.object.isRequired
 };
 
-export default Index;
+export default AboutPage;
