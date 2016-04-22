@@ -4,6 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 const styles = {
   button: {
+    borderRadius: 10,
     color: '#fff'
   }
 };
@@ -41,6 +42,7 @@ class LoginButton extends React.Component {
       <FlatButton
         label={ this.context.currentUser ? 'Sign Out' : 'Sign In'}
         style={styles.button}
+        backgroundColor="rgb(0, 188, 212)"
         onTouchTap={this.doLogin}
       />
     );
@@ -49,7 +51,7 @@ class LoginButton extends React.Component {
 
 LoginButton.contextTypes = {
   router: React.PropTypes.object.isRequired,
-  currentUser: React.PropTypes.object.isRequired,
+  currentUser: React.PropTypes.object,
   showMessage: React.PropTypes.func.isRequired
 };
 

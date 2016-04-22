@@ -1,12 +1,10 @@
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
 import { Link } from 'react-router';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import IconHome from 'material-ui/svg-icons/action/home';
 import IconInfo from 'material-ui/svg-icons/action/info';
 import IconImageCollectionsBookmark from 'material-ui/svg-icons/image/collections-bookmark';
-import IconAccountCircle from 'material-ui/svg-icons/action/account-circle';
 
 import LoginButton from '../components/loginButton';
 
@@ -17,8 +15,8 @@ const styles = {
 };
 
 class Navigation extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.handleToggle = this.handleToggle.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -45,7 +43,7 @@ class Navigation extends React.Component {
       </Link>
     );
 
-    if (Meteor.userId()) {
+    if (this.context.currentUser) {
       menuItems.push(
         <Link key="item_myimages" to="/myimages" style={styles.link}>
           <MenuItem leftIcon={<IconImageCollectionsBookmark />} onTouchTap={ this.handleClose }>
@@ -64,7 +62,7 @@ class Navigation extends React.Component {
     );
 
     menuItems.push(
-      <MenuItem key="item_login" leftIcon={<IconAccountCircle />} onTouchTap={ this.handleClose }>
+      <MenuItem key="item_login" onTouchTap={ this.handleClose }>
         <LoginButton />
       </MenuItem>
     );
@@ -85,5 +83,9 @@ class Navigation extends React.Component {
     );
   }
 }
+
+Navigation.contextTypes = {
+  currentUser: React.PropTypes.object
+};
 
 export default Navigation;

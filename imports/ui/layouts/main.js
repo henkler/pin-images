@@ -55,12 +55,12 @@ class MainLayout extends React.Component {
 }
 
 MainLayout.propTypes = {
-  currentUser: React.PropTypes.object.isRequired,
+  currentUser: React.PropTypes.object,
   children: React.PropTypes.object
 };
 
 MainLayout.childContextTypes = {
-  currentUser: React.PropTypes.object.isRequired,
+  currentUser: React.PropTypes.object,
   showMessage: React.PropTypes.func.isRequired
 };
 

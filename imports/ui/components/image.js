@@ -145,8 +145,7 @@ class Image extends React.Component {
 
   render() {
     return (
-      <div
-        style={ !this.state.loaded ? styles.hidden : styles.visible }>
+      <div style={ !this.state.loaded ? styles.hidden : styles.visible }>
         <Paper style={styles.paper} zDepth={4} visible={false}>
           <Card>
             <CardMedia
