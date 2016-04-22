@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 import AppBar from 'material-ui/AppBar';
 import { deepOrange500 } from 'material-ui/styles/colors';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -12,6 +13,21 @@ const muiTheme = getMuiTheme({
     accent1Color: deepOrange500
   }
 });
+
+const styles = {
+  pinCount: {
+    float: 'right',
+    display: 'inline-block',
+    width: 50,
+    height: 50,
+    lineHeight: '50px',
+    color: '#fff',
+    textAlign: 'center',
+    backgroundColor: 'rgb(0, 220, 255)',
+    fontSize: '1.2em',
+    borderRadius: '50%'
+  }
+};
 
 class MainLayout extends React.Component {
   constructor(props) {
@@ -36,6 +52,28 @@ class MainLayout extends React.Component {
     this.refs.messageBar.showMessage(message);
   }
 
+  renderPinCount() {
+    if (this.props.counts && this.props.counts.pinCount) {
+      return (
+        <Link to="/myimages">
+          <div style={styles.pinCount}>
+            <span>{this.props.counts.pinCount}</span>
+          </div>
+        </Link>
+      );
+    }
+
+    return null;
+  }
+
+  renderAppBarElementRight() {
+    if (this.props.currentUser) {
+      return this.renderPinCount();
+    }
+
+    return <LoginButton />;
+  }
+
   render() {
     return (
       <MuiThemeProvider muiTheme={ muiTheme }>
@@ -43,7 +81,7 @@ class MainLayout extends React.Component {
           <AppBar
             title="Pin Images"
             onLeftIconButtonTouchTap={ this.handleMenuClick }
-            iconElementRight={<LoginButton />}
+            iconElementRight={ this.renderAppBarElementRight() }
           />
           <Navigation ref="navBar" />
           { this.props.children }
@@ -56,6 +94,7 @@ class MainLayout extends React.Component {
 
 MainLayout.propTypes = {
   currentUser: React.PropTypes.object,
+  counts: React.PropTypes.object,
   children: React.PropTypes.object
 };
 
