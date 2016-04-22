@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router';
 import Paper from 'material-ui/Paper';
-import { Card, CardMedia, CardActions, CardTitle } from 'material-ui/Card';
+import Divider from 'material-ui/Divider';
+import { Card, CardMedia, CardActions, CardTitle, CardText } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
 import IconFavorite from 'material-ui/svg-icons/action/favorite-border';
 import IconModeEdit from 'material-ui/svg-icons/editor/mode-edit';
@@ -24,7 +26,9 @@ const styles = {
   },
   mediumIcon: {
     width: 48,
-    height: 48
+    height: 48,
+    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+    borderRadius: 10
   },
   mediumIconButton: {
     width: 50,
@@ -33,6 +37,27 @@ const styles = {
   },
   mediaOverlay: {
     background: 'initial'
+  },
+  pinCount: {
+    float: 'right',
+    display: 'inline-block',
+    width: 40,
+    height: 40,
+    lineHeight: '40px',
+    color: '#fff',
+    textAlign: 'center',
+    backgroundColor: '#bd081c',
+    fontSize: '1.2em',
+    borderRadius: '50%'
+  },
+  userLink: {
+    display: 'inline-block',
+    fontSize: '1.2em',
+    lineHeight: '40px',
+    color: 'black'
+  },
+  link: {
+    textDecoration: 'none'
   }
 };
 
@@ -84,7 +109,6 @@ class Image extends React.Component {
           onClick={ this.handleEditClick }
         >
           <IconModeEdit color="bd081c" />
-          <EditImage ref="editImage" image={this.props.image} />
         </IconButton>);
     }
 
@@ -112,7 +136,19 @@ class Image extends React.Component {
           <CardTitle
             title={this.props.image.description}
           />
+          <Divider />
+          <CardText>
+            <div style={styles.userLink}>
+              <Link to={`/images/${this.props.image.user._id}`} style={styles.link}>
+                <span>{this.props.image.user.profile.name}</span>
+              </Link>
+            </div>
+            <div style={styles.pinCount}>
+              <span>{this.props.image.pinCount}</span>
+            </div>
+          </CardText>
         </Card>
+        <EditImage ref="editImage" image={this.props.image} />
       </Paper>
     );
   }

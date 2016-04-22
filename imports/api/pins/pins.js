@@ -24,7 +24,8 @@ Pins.schema = new SimpleSchema({
   description: {
     type: String,
     label: 'Pin Description',
-    defaultValue: ''
+    defaultValue: '',
+    max: 40
   },
   userId: {
     type: String,

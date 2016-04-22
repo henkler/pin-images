@@ -104,6 +104,8 @@ class EditImage extends React.Component {
           <TextField
             ref="descriptionInput"
             hintText="Description"
+            fullWidth
+            maxLength={40}
             defaultValue={this.props.image.description}
           />
         </Dialog>

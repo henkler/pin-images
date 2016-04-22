@@ -93,12 +93,15 @@ class AddImage extends React.Component {
             ref="urlInput"
             hintText="Image URL"
             type="url"
+            fullWidth
           />
           <br />
           <label>Description: </label>
           <TextField
             ref="descriptionInput"
             hintText="Description"
+            fullWidth
+            maxLength={40}
           />
         </Dialog>
       </div>

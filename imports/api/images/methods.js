@@ -31,8 +31,7 @@ export const pin = new ValidatedMethod({
         'Image is already pinned');
     }
 
-    Images.update(image, { $push: { pinnedBy: this.userId } });
-    Images.update(image, { $inc: { pinCount: 1 } });
+    Images.update(image, { $push: { pinnedBy: this.userId, }, $inc: { pinCount: 1 } });
     Pins.insert({ imageId, description });
   }
 });
@@ -62,8 +61,7 @@ export const unpin = new ValidatedMethod({
         'Image is not pinned');
     }
 
-    Images.update(image, { $pull: { pinnedBy: this.userId } });
-    Images.update(image, { $inc: { pinCount: -1 } });
+    Images.update(image, { $pull: { pinnedBy: this.userId }, $inc: { pinCount: -1 } });
     Pins.remove(existingPin);
 
     // remove the image if the pin count has went < 1
