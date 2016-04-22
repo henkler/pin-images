@@ -23,7 +23,7 @@ Meteor.startup(() => {
   if (Images.find().count() === 0) {
     const data1 = [
       { url: 'http://www.ripleys.com/wp-content/uploads/2015/08/surprised-chicken.jpg', description: 'Is today Monday?' },
-      { url: 'http://smokeybones.com/wp-content/uploads/2015/11/smokehouse-burger.jpg', description: 'Tasty Burger?  Or plastic model?  Only you can decide.' },
+      { url: 'http://smokeybones.com/wp-content/uploads/2015/11/smokehouse-burger.jpg', description: 'Tasty Burger?  Or plastic model?' },
       { url: 'http://urbantastebuds.wpengine.netdna-cdn.com/wp-content/uploads/2014/06/most-expensive-burgers-in-the-world.jpg', description: 'My lifelong dream!' },
       { url: 'https://upload.wikimedia.org/wikipedia/commons/5/57/Doughnut_burger.jpg', description: 'What I eat on Tuesdays.' },
       { url: 'http://i.dailymail.co.uk/i/pix/2014/06/02/article-2646333-1E67CC7C00000578-220_634x464.jpg', description: 'Me and my only friend...' },
