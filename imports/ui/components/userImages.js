@@ -14,7 +14,7 @@ const UserImages = (props, context) => (
       label="Discover Images"
       style={styles.button}
       primary
-      onClick={() => context.router.push('/images')}
+      onClick={() => context.router.push('/')}
     />
     <ImageList
       publication={'userImages'} userId={props.params.userId}
