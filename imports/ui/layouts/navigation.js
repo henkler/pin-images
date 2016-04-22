@@ -6,8 +6,9 @@ import MenuItem from 'material-ui/MenuItem';
 import IconHome from 'material-ui/svg-icons/action/home';
 import IconInfo from 'material-ui/svg-icons/action/info';
 import IconImageCollectionsBookmark from 'material-ui/svg-icons/image/collections-bookmark';
+import IconAccountCircle from 'material-ui/svg-icons/action/account-circle';
 
-import AccountsUIWrapper from '../components/accountsUIWrapper';
+import LoginButton from '../components/loginButton';
 
 const styles = {
   link: {
@@ -63,8 +64,8 @@ class Navigation extends React.Component {
     );
 
     menuItems.push(
-      <MenuItem key="item_login" insetChildren onTouchTap={ this.handleClose }>
-        <AccountsUIWrapper />
+      <MenuItem key="item_login" leftIcon={<IconAccountCircle />} onTouchTap={ this.handleClose }>
+        <LoginButton />
       </MenuItem>
     );
 

@@ -5,6 +5,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Navigation from './navigation';
 import MessageBar from '../components/messageBar';
+import LoginButton from '../components/loginButton';
 
 const muiTheme = getMuiTheme({
   palette: {
@@ -21,7 +22,10 @@ class MainLayout extends React.Component {
   }
 
   getChildContext() {
-    return { showMessage: this.showMessage };
+    return {
+      currentUser: this.props.currentUser,
+      showMessage: this.showMessage
+    };
   }
 
   handleMenuClick() {
@@ -39,6 +43,7 @@ class MainLayout extends React.Component {
           <AppBar
             title="Pin Images"
             onLeftIconButtonTouchTap={ this.handleMenuClick }
+            iconElementRight={<LoginButton />}
           />
           <Navigation ref="navBar" />
           { this.props.children }
@@ -50,10 +55,12 @@ class MainLayout extends React.Component {
 }
 
 MainLayout.propTypes = {
+  currentUser: React.PropTypes.object.isRequired,
   children: React.PropTypes.object
 };
 
 MainLayout.childContextTypes = {
+  currentUser: React.PropTypes.object.isRequired,
   showMessage: React.PropTypes.func.isRequired
 };
 

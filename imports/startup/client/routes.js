@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 
-import MainLayout from '/imports/ui/layouts/main';
+import MainLayout from '/imports/ui/containers/main';
 import AboutPage from '/imports/ui/components/aboutPage';
 import AllImages from '/imports/ui/components/allImages';
 import UserImages from '/imports/ui/components/userImages';
