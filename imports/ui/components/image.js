@@ -58,25 +58,16 @@ const styles = {
   },
   link: {
     textDecoration: 'none'
-  },
-  hidden: {
-    display: 'none'
-  },
-  visible: {}
+  }
 };
 
 class Image extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      loaded: false
-    };
-
     this.handlePinClick = this.handlePinClick.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
     this.handleImageErrored = this.handleImageErrored.bind(this);
-    this.handleImageLoaded = this.handleImageLoaded.bind(this);
   }
 
   handlePinClick() {
@@ -94,10 +85,6 @@ class Image extends React.Component {
 
   handleImageErrored() {
     this.refs.image.src = '/invalid_image.png';
-  }
-
-  handleImageLoaded() {
-    this.setState({ loaded: true });
   }
 
   renderActions() {
@@ -145,39 +132,36 @@ class Image extends React.Component {
 
   render() {
     return (
-      <div style={ !this.state.loaded ? styles.hidden : styles.visible }>
-        <Paper style={styles.paper} zDepth={4} visible={false}>
-          <Card>
-            <CardMedia
-              overlay={this.renderActions()}
-              overlayContentStyle={styles.mediaOverlay}
-            >
-              <img
-                role="presentation"
-                ref="image"
-                src={this.props.image.url}
-                onError={ this.handleImageErrored }
-                onLoad={ this.handleImageLoaded }
-              />
-            </CardMedia>
-            <CardTitle
-              title={this.props.image.description}
+      <Paper style={styles.paper} zDepth={4} visible={false}>
+        <Card>
+          <CardMedia
+            overlay={this.renderActions()}
+            overlayContentStyle={styles.mediaOverlay}
+          >
+            <img
+              role="presentation"
+              ref="image"
+              src={this.props.image.url}
+              onError={ this.handleImageErrored }
             />
-            <Divider />
-            <CardText>
-              <div style={styles.userLink}>
-                <Link to={`/images/${this.props.image.user._id}`} style={styles.link}>
-                  <span>{this.props.image.user.profile.name}</span>
-                </Link>
-              </div>
-              <div style={styles.pinCount}>
-                <span>{this.props.image.pinCount}</span>
-              </div>
-            </CardText>
-          </Card>
-          <EditImage ref="editImage" image={this.props.image} />
-        </Paper>
-      </div>
+          </CardMedia>
+          <CardTitle
+            title={this.props.image.description}
+          />
+          <Divider />
+          <CardText>
+            <div style={styles.userLink}>
+              <Link to={`/images/${this.props.image.user._id}`} style={styles.link}>
+                <span>{this.props.image.user.profile.name}</span>
+              </Link>
+            </div>
+            <div style={styles.pinCount}>
+              <span>{this.props.image.pinCount}</span>
+            </div>
+          </CardText>
+        </Card>
+        <EditImage ref="editImage" image={this.props.image} />
+      </Paper>
     );
   }
 }

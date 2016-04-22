@@ -1,29 +1,29 @@
 /* eslint no-param-reassign: ["error", { "props": false }] */
 import { Meteor } from 'meteor/meteor';
-import { composeWithTracker } from 'react-komposer';
-
+import { createContainer } from 'meteor/react-meteor-data';
 import { Pins } from '/imports/api/pins/pins';
 import { Images } from '/imports/api/images/images';
 import ImageList from '../components/imageList';
 
-const composer = (props, onData) => {
-  if (Meteor.subscribe(props.publication, props.userId).ready()) {
-    const images = Images.find().fetch();
+const ImageListContainer = createContainer((props) => {
+  const handle = Meteor.subscribe(props.publication, props.userId);
+  const images = Images.find().fetch();
 
-    images.forEach(image => {
-      const pin = Pins.findOne({ imageId: image._id });
-      if (pin) {
-        image.description = pin.description;
-      }
+  images.forEach(image => {
+    const pin = Pins.findOne({ imageId: image._id });
+    if (pin) {
+      image.description = pin.description;
+    } else {
+      image.description = '';
+    }
 
-      const user = Meteor.users.findOne(image.userId);
-      if (user) {
-        image.user = user;
-      }
-    });
+    image.user = Meteor.users.findOne(image.userId);
+  });
 
-    onData(null, { images });
-  }
-};
+  return {
+    images,
+    isReady: handle.ready()
+  };
+}, ImageList);
 
-export default composeWithTracker(composer)(ImageList);
+export default ImageListContainer;
