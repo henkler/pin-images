@@ -53,7 +53,7 @@ class MainLayout extends React.Component {
   }
 
   renderPinCount() {
-    if (this.props.counts && this.props.counts.pinCount) {
+    if (this.props.counts && this.props.counts.pinCount !== undefined) {
       return (
         <Link to="/myimages">
           <div style={styles.pinCount}>
